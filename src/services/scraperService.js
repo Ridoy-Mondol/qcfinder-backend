@@ -1,8 +1,9 @@
 const kakobuyScraper = require ('../scrapers/KakobuyScraper')
 const acbuyScraper = require ('../scrapers/acbuyScraper')
+const sugargooScraper = require ('../scrapers/sugargooScraper')
 const productScraper = require ('../scrapers/productScraper')
 
-const scrapers = [productScraper, acbuyScraper, kakobuyScraper];
+const scrapers = [productScraper, acbuyScraper, sugargooScraper, kakobuyScraper];
 
 async function scrapeAllAgents(productUrl) {
   const results = await Promise.all(

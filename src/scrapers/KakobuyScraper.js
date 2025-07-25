@@ -9,7 +9,7 @@ const searchViaKakobuySpreadsheet = async (originalUrl) => {
   let browser;
   try {
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: ["--no-sandbox"],
     });
 

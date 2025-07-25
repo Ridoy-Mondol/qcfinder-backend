@@ -12,8 +12,9 @@ yarn-error.log*
 # OS files
 .DS_Store
 
-# acbuy-session
+# agent-session
 acbuy-session/
+sugargoo-session/
 
 # tesseract-data
 eng.traineddata

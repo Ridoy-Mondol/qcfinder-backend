@@ -58,7 +58,7 @@ const searchAcbuy = async (originalUrl) => {
   let browser;
   try {
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       userDataDir: "./acbuy-session",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       slowMo: 50,
@@ -225,7 +225,7 @@ const searchAcbuy = async (originalUrl) => {
       }
     });
 
-    console.log("✅ Successfully scrapes qc images from acbuy");
+    console.log(`✅ Scraped ${images.length} QC images from Acbuy`);
 
     return {
       agent,
