@@ -43,7 +43,7 @@ const searchSugargoo = async (originalUrl) => {
   let browser;
   try {
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       userDataDir: "./sugargoo-session",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       slowMo: 50,
@@ -130,11 +130,7 @@ const searchSugargoo = async (originalUrl) => {
     } catch (e) {
       console.warn("🚫 QC section not found in sugargoo.");
       return {
-        agent: "Sugargoo",
         images: [],
-        originalProductUrl: originalUrl,
-        agentProductUrl: page.url(),
-        message: "No QC images found",
       };
     }
 
@@ -151,10 +147,7 @@ const searchSugargoo = async (originalUrl) => {
 
     console.log(`✅ Scraped ${images.length} images from Sugargoo`);
     return {
-      agent: "Sugargoo",
       images,
-      originalProductUrl: originalUrl,
-      agentProductUrl: page.url(),
     };
   } catch (err) {
     console.error("❌ Sugargoo scraping failed:", err.message);

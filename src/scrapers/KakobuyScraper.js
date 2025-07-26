@@ -38,17 +38,8 @@ const searchViaKakobuySpreadsheet = async (originalUrl) => {
       }
     });
 
-    let agent = "Kakobuy QC Sheet";
-    if (originalUrl.includes("weidian.com"))
-      agent = "Weidian (via Kakobuy Spreadsheet)";
-    else if (originalUrl.includes("taobao.com"))
-      agent = "Taobao (via Kakobuy Spreadsheet)";
-
     return {
-      agent,
       images,
-      originalProductUrl: originalUrl,
-      agentProductUrl: targetUrl,
     };
   } catch (err) {
     console.error("Kakobuy Spreadsheet scraping failed:", err.message);

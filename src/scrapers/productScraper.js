@@ -33,9 +33,9 @@ const searchKakobuy = async (originalUrl) => {
       }
     });
 
-    let agent = "Kakobuy";
-    if (originalUrl.includes("weidian.com")) agent = "Weidian (via Kakobuy)";
-    else if (originalUrl.includes("taobao.com")) agent = "Taobao (via Kakobuy)";
+    let agent;
+    if (originalUrl.includes("weidian.com")) agent = "Weidian";
+    else if (originalUrl.includes("taobao.com")) agent = "Taobao";
 
     return {
       agent,
@@ -43,7 +43,6 @@ const searchKakobuy = async (originalUrl) => {
       price,
       images,
       originalProductUrl: originalUrl,
-      agentProductUrl: kakobuyUrl,
     };
   } catch (err) {
     console.error("Kakobuy scraping failed:", err.message);

@@ -27,7 +27,6 @@ const extractInfoFromUrl = (url) => {
   return {
     id: idMatch[1],
     source: isTaobao ? "TB" : "WD",
-    agent: isTaobao ? "Taobao (via Acbuy)" : "Weidian (via Acbuy)",
   };
 };
 
@@ -51,7 +50,7 @@ const solveCaptcha = async (page, captchaSelector, savePath) => {
 };
 
 const searchAcbuy = async (originalUrl) => {
-  const { id, source, agent } = extractInfoFromUrl(originalUrl);
+  const { id, source } = extractInfoFromUrl(originalUrl);
   const loginUrl = `https://www.acbuy.com/login?redirectUrl=%2Fproduct%3Fid%3D${id}%26source%3D${source}`;
   const targetUrl = `https://www.acbuy.com/product?id=${id}&source=${source}`;
 
@@ -200,11 +199,7 @@ const searchAcbuy = async (originalUrl) => {
     } catch (e) {
       console.log("🚫 No QC section found.");
       return {
-        agent,
         images: [],
-        originalProductUrl: originalUrl,
-        agentProductUrl: targetUrl,
-        message: "No QC images found",
       };
     }
 
@@ -228,10 +223,7 @@ const searchAcbuy = async (originalUrl) => {
     console.log(`✅ Scraped ${images.length} QC images from Acbuy`);
 
     return {
-      agent,
       images,
-      originalProductUrl: originalUrl,
-      agentProductUrl: targetUrl,
     };
   } catch (err) {
     console.error("❌ Acbuy scraping failed:", err.message);
