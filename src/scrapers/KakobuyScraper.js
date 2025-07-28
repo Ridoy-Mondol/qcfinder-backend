@@ -3,6 +3,7 @@ const BaseScraper = require("./baseScraper");
 const cheerio = require("cheerio");
 
 const searchViaKakobuySpreadsheet = async (originalUrl) => {
+  console.log("🔍 Kakobuy: Starting scraping for URL:", originalUrl);
   const encodedUrl = encodeURIComponent(originalUrl);
   const targetUrl = `https://kakobuy-spreadsheet.com/features/kakobuy-qc-images?url=${encodedUrl}`;
 
@@ -15,11 +16,13 @@ const searchViaKakobuySpreadsheet = async (originalUrl) => {
 
     const page = await browser.newPage();
     await page.goto(targetUrl, { waitUntil: "networkidle2" });
+    console.log("📡 Kakobuy: Navigated to target URL");
 
     await page.waitForSelector(
       "div.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3",
-      { timeout: 20000 }
+      { timeout: 5000 }
     );
+    console.log("✅ Kakobuy: Selector loaded, starting to scrape content");
 
     const html = await page.content();
     const $ = cheerio.load(html);
@@ -37,6 +40,7 @@ const searchViaKakobuySpreadsheet = async (originalUrl) => {
         }
       }
     });
+    console.log(`📸 Kakobuy: Found ${images.length} QC images`);
 
     return {
       images,

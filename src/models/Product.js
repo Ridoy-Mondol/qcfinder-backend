@@ -11,6 +11,11 @@ const productSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  productId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   priceCNY: Number,
   priceUSD: Number,
   images: [String],

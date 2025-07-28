@@ -5,6 +5,8 @@ const handleScrape = async (req, res) => {
   const { url } = req.body;
   if (!url) return res.status(400).json({ error: "Missing URL" });
 
+  console.log(`📥 handleScrape called with URL: ${url}`);
+
   try {
     // 🔍 Check in DB first
     const existing = await ProductModel.findOne({ originalProductUrl: url });
