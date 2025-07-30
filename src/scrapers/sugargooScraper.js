@@ -43,7 +43,7 @@ const searchSugargoo = async (originalUrl) => {
   let browser;
   try {
     browser = await puppeteer.launch({
-      headless: true,
+      headless: false,
       userDataDir: "./sugargoo-session",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       slowMo: 50,
@@ -141,7 +141,8 @@ const searchSugargoo = async (originalUrl) => {
     $(".photos-cont .ant-image img.ant-image-img").each((_, img) => {
       const src = $(img).attr("src");
       if (src && src.startsWith("https://") && !src.includes("base64")) {
-        images.push(src.trim());
+        const cleanedSrc = src.split("?")[0].trim();
+        images.push(cleanedSrc);
       }
     });
 

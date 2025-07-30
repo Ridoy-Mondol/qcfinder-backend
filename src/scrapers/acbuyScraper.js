@@ -57,7 +57,7 @@ const searchAcbuy = async (originalUrl) => {
   let browser;
   try {
     browser = await puppeteer.launch({
-      headless: true,
+      headless: false,
       userDataDir: "./acbuy-session",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       slowMo: 50,
@@ -195,7 +195,7 @@ const searchAcbuy = async (originalUrl) => {
 
     console.log("🔍 Checking for QC section...");
     try {
-      await page.waitForSelector(".qc-label", { timeout: 5000 });
+      await page.waitForSelector(".qc-label", { timeout: 10000 });
     } catch (e) {
       console.log("🚫 No QC section found.");
       return {
@@ -216,7 +216,8 @@ const searchAcbuy = async (originalUrl) => {
         src.startsWith("https://oss.acbuy.com/") &&
         !src.includes("base64")
       ) {
-        images.push(src.trim());
+        const cleanedSrc = src.split("?")[0].trim();
+        images.push(cleanedSrc);
       }
     });
 
