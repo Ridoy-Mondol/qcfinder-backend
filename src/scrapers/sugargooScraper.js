@@ -43,7 +43,7 @@ const searchSugargoo = async (originalUrl) => {
   let browser;
   try {
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       userDataDir: "./sugargoo-session",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       slowMo: 50,

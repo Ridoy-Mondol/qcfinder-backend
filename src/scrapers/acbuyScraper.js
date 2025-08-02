@@ -57,7 +57,7 @@ const searchAcbuy = async (originalUrl) => {
   let browser;
   try {
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       userDataDir: "./acbuy-session",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       slowMo: 50,
